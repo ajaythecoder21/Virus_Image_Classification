@@ -1,0 +1,11 @@
+version: "3.11"
+
+services:
+  dlapp:
+    container_name: dlapp
+    image: dlapp
+    ports:
+      - "8080:8080"
+    build:
+      context: .
+      dockerfile: Dockerfile

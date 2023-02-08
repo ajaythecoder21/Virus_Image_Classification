@@ -2,12 +2,16 @@
 
 import torch
 import torch.nn as nn
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, url_for
 import torchvision.transforms as transforms
 from PIL import Image
 import io
 app = Flask(__name__)
-print(app)
+
+
+import os
+#os.environ['FLASK_RUN_PORT']='5001'
+os.environ['FLASK_DEBUG'] = 'True'
 
 class VirusCNNModelV0(nn.Module):
   def __init__(self, input_features, hidden_features, output_features):
@@ -49,7 +53,11 @@ transform = transforms.Compose([
 
 @app.route("/")
 def home():
-   return render_template('index.html')
+   return render_template('index.html', home_url=url_for('home'))
+
+@app.route("/about")
+def about():
+  return render_template('about.html', about_url=url_for('about'))
 @app.route("/", methods=["GET", "POST"])
 def predict():
    class_names = ['Covid', 'Normal', 'Viral Pneumonia']
@@ -68,4 +76,4 @@ def predict():
     return render_template('index.html', **context_dict)
 if __name__ == "__main__":
 
-    app.run(debug=True)
+    app.run(port=8080)
