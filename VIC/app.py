@@ -76,4 +76,4 @@ def predict():
     return render_template('index.html', **context_dict)
 if __name__ == "__main__":
 
-    app.run(port=8080)
+    app.run()
