@@ -9,6 +9,8 @@ torchvision = "==0.14.1"
 flask = "*"
 torchaudio = "*"
 gunicorn = "*"
+heroku = "*"
+awscli = "*"
 
 [dev-packages]
 
